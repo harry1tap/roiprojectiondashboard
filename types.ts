@@ -19,6 +19,5 @@ export interface ComputedMetrics {
   roi_multiplier: number;
   net_benefit: number;
   monthly_benefit: number;
-  npv: number; // Estimated 3 Year NPV
   support_costs: number; // Derived from investment breakdown
 }

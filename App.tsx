@@ -30,15 +30,6 @@ const App: React.FC = () => {
     const net_benefit = data.annual_savings - data.annual_recurring;
     const monthly_benefit = net_benefit / 12;
     
-    // Simple 3-Year NPV Calculation
-    // Year 0: -Investment
-    // Year 1-3: Net Annual Benefit (discounted 10%)
-    const rate = 0.10;
-    const year1 = net_benefit / Math.pow(1 + rate, 1);
-    const year2 = net_benefit / Math.pow(1 + rate, 2);
-    const year3 = net_benefit / Math.pow(1 + rate, 3);
-    const npv = (year1 + year2 + year3) - data.investment;
-
     // Calculate Support/Other costs from investment breakdown
     // Investment = Impl + (Platform*12) + (AI*12) + Support
     const platformAnnual = data.platform_costs * 12;
@@ -51,7 +42,6 @@ const App: React.FC = () => {
       roi_multiplier,
       net_benefit,
       monthly_benefit,
-      npv,
       support_costs
     };
   }, [data]);
@@ -167,11 +157,11 @@ const App: React.FC = () => {
           {/* Right Column: Financial Projections */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-6">
              <MetricCard 
-              title="Net Present Value"
-              value={formatCurrency(metrics.npv)}
-              subtitle="3-Year Projection (10% DR)"
+              title="Year 1 Net Profit"
+              value={formatCurrency(metrics.net_benefit)}
+              subtitle="After all costs"
               icon={<TrendingUp className="w-6 h-6" />}
-              iconBgColor="bg-purple-500"
+              iconBgColor="bg-emerald-500"
               delay={0.5}
             />
             <MetricCard 
@@ -252,7 +242,7 @@ const App: React.FC = () => {
                     <td className="px-6 py-4 text-slate-400">—</td>
                   </tr>
                   <tr className="bg-blue-50/50">
-                    <td className="px-6 py-4 font-bold text-slate-800">Net Annual Benefit</td>
+                    <td className="px-6 py-4 font-bold text-slate-800">Year 1 Net Profit</td>
                     <td className="px-6 py-4 font-bold text-blue-600">{formatCurrency(metrics.net_benefit)}</td>
                     <td className="px-6 py-4 font-bold text-emerald-500">+{formatCurrency(metrics.monthly_benefit)}</td>
                   </tr>
@@ -261,7 +251,7 @@ const App: React.FC = () => {
             </div>
             
             <div className="mt-6 p-4 bg-slate-50 rounded-lg text-xs text-slate-500 leading-relaxed">
-              * Calculations based on provided hours saved and hourly rates. ROI includes implementation fees and year-1 recurring costs. NPV projected over 3 years with a 10% discount rate.
+              * Calculations based on provided hours saved and hourly rates. ROI includes implementation fees and year-1 recurring costs. All projections are for the first 12 months.
             </div>
           </div>
         </div>

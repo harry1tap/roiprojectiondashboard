@@ -81,7 +81,7 @@ export const RoiGauge: React.FC<RoiGaugeProps> = ({ roi, multiplier }) => {
       </div>
 
       <div className="mt-4">
-        <div className="text-sm font-bold text-slate-400 tracking-wide mb-2">RETURN ON INVESTMENT</div>
+        <div className="text-sm font-bold text-slate-400 tracking-wide mb-2 uppercase">Year 1 Return on Investment</div>
         <div className="text-sm text-slate-600 bg-slate-50 px-4 py-2 rounded-lg inline-block">
           For every <span className="font-bold">£1</span> invested, returns <span className="font-bold text-blue-600">£{multiplier.toFixed(2)}</span>
         </div>

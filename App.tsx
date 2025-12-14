@@ -27,6 +27,7 @@ const App: React.FC = () => {
     if (!data) return null;
 
     const roi_multiplier = (data.roi / 100) + 1;
+    // Calculated as Annual Savings - Annual Recurring Costs
     const net_benefit = data.annual_savings - data.annual_recurring;
     const monthly_benefit = net_benefit / 12;
     
